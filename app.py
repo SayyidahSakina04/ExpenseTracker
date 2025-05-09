@@ -1,4 +1,6 @@
 from expense import Expense
+import calendar
+import datetime as dt
 
 def main():
     print(f"----------Expense Tracker!----------\n")
@@ -77,9 +79,15 @@ def summaryOfExpenses(fileName, budget):
     print("\n----------Budget----------")
     totalSpent = sum([ex.amount for ex in expenses])
     print(f"Total Spent: Rs.{totalSpent:.2f}")
-    print(f"Remaining Budget: Rs.{budget - totalSpent:.2f}")
+    remainingBudget = budget - totalSpent
+    print(f"Remaining Budget: Rs.{remainingBudget:.2f}")
 
-
+    print("\n----------Remaining Days For Budget----------")
+    now = dt.datetime.now()
+    daysInMonth = calendar.monthrange(now.year, now.month)[1]
+    remainingDaysInMonth = daysInMonth - now.day
+    dailyBudget = remainingBudget /remainingDaysInMonth
+    print(f"Budget Per Day Left: Rs.{dailyBudget}")
 
 
 if __name__ == "__main__":  # only true when you run this file directly
